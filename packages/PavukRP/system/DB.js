@@ -11,7 +11,7 @@ https://github.com/SashaGoncharov19/pavukrp-gamemode
                   обязательное!
 
     */
-const mysql = require('mysql2');
+const mysql = require('mysql');
 
 // Создаём подключение к БД
 const connection = mysql.createPool({
@@ -34,10 +34,4 @@ connection.getConnection(function(err) {
         return;
     }
     console.log('[SERVER] Успешное подключение к БД!');
-});
-
-//Закрываем соединение с БД когда сервер выключается
-mp.events.add('serverShutdown', async() => {
-    DBconnection.end();
-    console.log(`Соединение закрыто!`);
 });

@@ -41,4 +41,9 @@ mp.events.addCommand('veh', (player, vehname) => {
    player.veh.dimension = player.dimension;
 });
 
+//Команда для вывода информации всем игрокам (Не протестировано)
+mp.events.addCommand('gl', (player, fullText, args) => {
+   mp.players.broadcast(`[A] ${player.name}: ${args}`);
+});
+
 console.log('[SERVER] Команды загружены!');
