@@ -34,12 +34,21 @@ mp.events.addCommand('armor', (player) => {
 });
 
 //Команда спавна автомобиля /veh carname (/veh neon)
-mp.events.addCommand('veh', (player, vehname) => {
-   var pos = player.position;
-   pos.x += 2.0;
-   player.veh = mp.vehicles.new(vehname, pos);
-   player.veh.dimension = player.dimension;
-});
+mp.events.addCommand('veh', (player, _, id, veh, color1, color2) => {
+    if (id == undefined || veh == undefined) return player.outputChatBox('/veh [id] [model] [color1] [color2]');
+    let target = mp.players.at(id);
+    if (target == null) return player.notify('~r~ID игрока не найден!');
+    let pos;
+    pos = target.position;
+    var adminVeh = mp.vehicles.new(mp.joaat(veh), new mp.Vector3(pos.x + 2, pos.y, pos.z));
+    adminVeh.setColor(parseInt(color1), parseInt(color2));
+    adminVeh.numberPlate = "SWG RP";
+    player.dim = player.id;
+    setTimeout(() => {
+        target.putIntoVehicle(adminVeh, 0) // Спавн за водительское место
+    }, 150)
+    player.notify('~g~ Заспавенно!');
+})
 
 //Команда для вывода информации всем игрокам (Не протестировано)
 mp.events.addCommand('gl', (player, fullText, args) => {
