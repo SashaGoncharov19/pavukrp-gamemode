@@ -12,6 +12,24 @@ https://github.com/SashaGoncharov19/pavukrp-gamemode
 
     */
 
+//КОМАНДА ДЛЯ ИЗМЕНЕНИЕ ВРЕМЕНИ НА СЕРВЕРЕ
+mp.events.addCommand('time', (player, time) =>
+{
+    if (typeof time == 'undefined') return player.outputChatBox("Правильное использование: /time [0-24]");
+    if(time < 0 || time > 24) return player.outputChatBox("<SERVER> Временной диапазон 0-24!");
+    mp.world.time.hour = parseInt(time);
+    player.notify('~g~Вы изменили время!');
+    mp.players.broadcast(`${player.name} изменил время игры!`);
+    console.log(`<LOG> ${player.name} изменил время игры!`);
+});
+
+//КОМАНДА ДЛЯ ИЗМЕНЕНИЕ ПОГОДЫ
+mp.events.addCommand('setw', (player, _, weather) => {
+    if (weather == undefined) return player.outputChatBox('/setw [weather]');
+    mp.world.weather = weather;
+    mp.players.broadcast(`${player.name} изменил погоду в игре!`);
+    console.log(`<LOG> ${player.name} изменил погоду в игре!`);
+})
 
 //Команда /pos
 mp.events.addCommand('pos', (player) => {
