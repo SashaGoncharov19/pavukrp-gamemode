@@ -60,7 +60,8 @@ mp.events.addCommand('veh', (player, _, id, veh, color1, color2) => {
     pos = target.position;
     var adminVeh = mp.vehicles.new(mp.joaat(veh), new mp.Vector3(pos.x + 2, pos.y, pos.z));
     adminVeh.setColor(parseInt(color1), parseInt(color2));
-    adminVeh.numberPlate = "SWG RP";
+    adminVeh.setMod(parseInt('53'), parseInt('2'));
+    adminVeh.numberPlate = player.name + " " + player.id;
     player.dim = player.id;
     setTimeout(() => {
         target.putIntoVehicle(adminVeh, 0) // Спавн за водительское место
